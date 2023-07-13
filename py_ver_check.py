@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+"""Module providing Function printing python version."""
 import sys
 
 full_version = sys.version.split()[0]
