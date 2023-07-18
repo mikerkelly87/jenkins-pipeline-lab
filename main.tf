@@ -12,8 +12,8 @@ resource "aws_vpc" "vpc-jenkins" {
 
 # Setup the '10.114.1.0/24' subnet in the 'vpc-jenkins' VPC
 resource "aws_subnet" "jenkins-subnet" {
-  vpc_id                  = aws_vpc.vpc-jenkins.id
-  cidr_block              = "10.114.1.0/24"
+  vpc_id = aws_vpc.vpc-jenkins.id
+  cidr_block = "10.114.1.0/24"
 }
 
 # Create the 'igw-jenkins' internet gateway in the 'vpc-jenkins' VPC
