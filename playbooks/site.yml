@@ -1,0 +1,35 @@
+---
+# Play to install required packages
+- name: Install Packages
+  hosts: localhost
+  become: true
+
+  tasks:
+
+    # Task to install the podman package
+    - name: Install Required Packages
+      ansible.builtin.dnf:
+        name: podman
+        state: present
+
+# Play to download the container image, create the
+# container, and run the application in the container
+- name: Create the Application Container
+  hosts: localhost
+
+  tasks:
+
+    # Task to download the python container image
+    - name: Download the Container Image
+      containers.podman.podman_image:
+        name: registry.access.redhat.com/ubi9/python-311
+
+    # Task to create the container and run the python application
+    - name: Create the Container to Run the Application
+      containers.podman.podman_container:
+        name: python-app
+        image: registry.access.redhat.com/ubi9/python-311
+        state: started
+        volume:
+          - /home/ec2-user/jenkins-pipeline-lab:/opt/app-root/src/:Z
+        command: python3 py_ver_check.py
